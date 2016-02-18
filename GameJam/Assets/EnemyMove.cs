@@ -22,8 +22,6 @@ public class EnemyMove : MonoBehaviour {
     public float threshold = 5.0f;  // how far from waypoint must we get before it is considered reached
     public float playerDistanceThreshold = 5.0f;
     public float secondsCircling = 20.0f;
-    public float circlingYOffset = 200.0f; // how far above the player the enemies should be circling;
-    public Vector3 circlingScale;
     public float keepBearingsWhileCircling = 1.0f;
     
 
@@ -122,14 +120,11 @@ public class EnemyMove : MonoBehaviour {
     void MoveTowardsPlayer()
     {
         Vector3 playerPos = player.position;
-        playerPos.y += circlingYOffset;
 
         Vector3 direction = playerPos - transform.position;
 
-        float circlingMagnitude = Vector3.Scale(direction, circlingScale).magnitude;
-
         keepBearingsTimer -= Time.deltaTime;
-        if (circlingMagnitude < playerDistanceThreshold) //threshold is distance you want circle strafing to start
+        if (direction.magnitude < playerDistanceThreshold) //threshold is distance you want circle strafing to start
         {
             if (!isCircling)
             {
