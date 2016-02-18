@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.SceneManagement;
+//using UnityEngine.SceneManagement;
 
 public class ButtonInputs : MonoBehaviour {
 
@@ -34,17 +34,17 @@ public class ButtonInputs : MonoBehaviour {
 
     public void Options()
     {
-        SceneManager.LoadScene("Options");
+        //SceneManager.LoadScene("Options");
     }
 
     public void Credits()
     {
-        SceneManager.LoadScene("Credits");
+       // SceneManager.LoadScene("Credits");
     }
 
     public void BacktoMain()
     {
-        SceneManager.LoadScene("MainMenu");
+      //  SceneManager.LoadScene("MainMenu");
     }
 
     public void Fullscreen()
