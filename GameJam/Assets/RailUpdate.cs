@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class RailUpdate : MonoBehaviour {
 
@@ -20,10 +21,11 @@ public class RailUpdate : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-       NodeList = GameObject.FindGameObjectsWithTag("TrackNode");
+
+        NodeList = GameObject.FindGameObjectsWithTag("TrackNode").OrderBy(gameObject => gameObject.name).ToArray<GameObject>();
       DebugLength = NodeList.GetLength(DebugLength);
        Controller = GetComponent<CharacterController>();
-       CurrentIndex = DebugLength - 1;
+       CurrentIndex = 0;
        DestinationNode = NodeList[CurrentIndex];
        MyTrans = GetComponent<Transform>();
 
@@ -37,12 +39,13 @@ public class RailUpdate : MonoBehaviour {
 
         if (Going)
         {
+            
             float M;
             MoveDirection = DestinationNode.GetComponent<Transform>().position - MyTrans.position;
            // GetComponent<Transform>().Translate(MoveDirection.normalized * Speed * Time.deltaTime);
-            //Controller.Move(MoveDirection.normalized * Speed * Time.deltaTime);
+            Controller.Move(MoveDirection.normalized * Speed * Time.deltaTime);
 
-            MyTrans.localPosition += MoveDirection.normalized * Speed * Time.deltaTime;
+            //MyTrans.localPosition += MoveDirection.normalized * Speed * Time.deltaTime;
 
             //Angle = Vector3.Angle( MoveDirection.normalized, MyTrans.forward.normalized);
 
@@ -64,9 +67,11 @@ public class RailUpdate : MonoBehaviour {
 
     void OnCollisionEnter(Collision col)
     {
+
         if (col.gameObject == DestinationNode)
         {
-            if (CurrentIndex == 0)
+
+            if (CurrentIndex == DebugLength - 1)
             {
                 //Run End Level Here
                 //[
@@ -80,7 +85,7 @@ public class RailUpdate : MonoBehaviour {
             }
             else
             {
-                CurrentIndex--;
+                CurrentIndex++;
                 DestinationNode = NodeList[CurrentIndex];
                 Destroy(col.gameObject);
             }
