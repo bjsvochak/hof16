@@ -5,11 +5,22 @@ using UnityEngine.SceneManagement;
 
 public class ButtonInputs : MonoBehaviour {
 
-    
-	// Use this for initialization
-	void Start () {
-        
-	}
+
+    public static void FadeToBlack()
+    {
+        GameObject.Find("Image").GetComponent<Image>().CrossFadeAlpha(0.0f, 2.0f, true);
+    }
+
+    public static void FadeBack()
+    {
+        GameObject.Find("Image").GetComponent<Image>().CrossFadeAlpha(1.0f, 2.0f, true);
+
+    }
+    // Use this for initialization
+    void Start () {
+        if (UnityEngine.VR.VRDevice.isPresent)
+            Screen.fullScreen = true;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -38,6 +49,7 @@ public class ButtonInputs : MonoBehaviour {
 
     public void Fullscreen()
     {
+        if(!UnityEngine.VR.VRDevice.isPresent)
         Screen.fullScreen = !Screen.fullScreen;
     }
 
@@ -47,5 +59,15 @@ public class ButtonInputs : MonoBehaviour {
         Application.Quit();
 
         //Application.CancelQuit();
+    }
+
+   void OnTriggerEnter(Collider col)
+    {
+        FadeToBlack();
+    }
+
+    void OnTriggerExit(Collider col)
+    {
+        FadeBack();
     }
 }
