@@ -25,10 +25,10 @@ public class DebugTurretLock : MonoBehaviour {
         MaxDistance = 100.0f;
         TurretList = GameObject.FindGameObjectsWithTag("AutoTurret");
 
-        BackSys = TurretList[0].GetComponent <AutoTurretLock>();
-        FrontSys = TurretList[1].GetComponent<AutoTurretLock>();
-        LeftSys = TurretList[2].GetComponent<AutoTurretLock>();
-        RightSys = TurretList[3].GetComponent<AutoTurretLock>();
+        //BackSys = TurretList[0].GetComponent <AutoTurretLock>();
+        //FrontSys = TurretList[1].GetComponent<AutoTurretLock>();
+        //LeftSys = TurretList[2].GetComponent<AutoTurretLock>();
+        //RightSys = TurretList[3].GetComponent<AutoTurretLock>();
 
 	}
 	
