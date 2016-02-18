@@ -21,7 +21,7 @@ public class Basic_Projectile : MonoBehaviour {
 	// Update is called once per frame
 	public virtual void Update () 
     {
-        m_rRidgidBody.AddForce(transform.forward * m_fSpeed * Time.deltaTime);
+        //m_rRidgidBody.AddForce(-transform.forward * m_fSpeed * Time.deltaTime);
 
         m_fLife -= Time.deltaTime;
         if (m_fLife <= 0)

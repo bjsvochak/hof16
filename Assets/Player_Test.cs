@@ -13,7 +13,7 @@ public class Player_Test : MonoBehaviour {
         if (Input.GetButtonDown("Fire1"))
         {
             GameObject projectile = (GameObject)Instantiate(Resources.Load("Projectile"),this.transform.position + transform.forward * 2, this.transform.rotation) as GameObject;
-            projectile.GetComponent<Rigidbody>().AddForce(transform.forward * projectile.GetComponent<Basic_Projectile>().m_fSpeed * Time.deltaTime);
+            //projectile.GetComponent<Rigidbody>().AddForce(-transform.forward * projectile.GetComponent<Basic_Projectile>().m_fSpeed * Time.deltaTime);
             Debug.Log("Fired");
         }
 
