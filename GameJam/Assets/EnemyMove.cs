@@ -22,7 +22,7 @@ public class EnemyMove : MonoBehaviour {
     public float threshold = 5.0f;  // how far from waypoint must we get before it is considered reached
     public float playerDistanceThreshold = 5.0f;
     public float secondsCircling = 20.0f;
-    public float keepBearingsWhileCircling = 1.0f;
+    public float keepBearingsWhileCircling = 7.0f;
     
 
     private PooledObject pooledObject;
