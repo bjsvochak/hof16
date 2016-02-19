@@ -29,22 +29,26 @@ public class ButtonInputs : MonoBehaviour {
 
     public void StartGame()
     {
+         Application.LoadLevel("CapitalShipFight");
         //SceneManager.LoadScene("MainMenu");
     }
 
     public void Options()
     {
+        Application.LoadLevel("Options");
         //SceneManager.LoadScene("Options");
     }
 
     public void Credits()
     {
-       // SceneManager.LoadScene("Credits");
+        Application.LoadLevel("Credits");
+        // SceneManager.LoadScene("Credits");
     }
 
     public void BacktoMain()
     {
-      //  SceneManager.LoadScene("MainMenu");
+        Application.LoadLevel("MainMenu");
+        //  SceneManager.LoadScene("MainMenu");
     }
 
     public void Fullscreen()
@@ -57,7 +61,6 @@ public class ButtonInputs : MonoBehaviour {
     {
         
         Application.Quit();
-
         //Application.CancelQuit();
     }
 
