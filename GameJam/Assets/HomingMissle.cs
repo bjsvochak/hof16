@@ -9,7 +9,7 @@ public class HomingMissle : Basic_Projectile {
 	void Start () {
 	}
 
-    void SetTarget(GameObject target)
+    public void SetTarget(GameObject target)
     {
         m_gTarget = target;
     }

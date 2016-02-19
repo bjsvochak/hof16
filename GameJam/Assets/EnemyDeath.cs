@@ -25,5 +25,6 @@ public class EnemyDeath : MonoBehaviour {
     {
         isDead = true;
         //GetComponent<OtherScript>().enabled = false;
+        Destroy(gameObject);
     }
 }
