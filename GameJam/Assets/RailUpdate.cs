@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using UnityStandardAssets.Utility;
 
 public class RailUpdate : MonoBehaviour {
 
@@ -17,6 +18,7 @@ public class RailUpdate : MonoBehaviour {
   public float rotationWidth = 2.0f;
   private RailUpdate Script;
   private Rigidbody rb;
+  private AutoMoveAndRotate amar;
 
   CharacterController Controller;
 
@@ -30,7 +32,8 @@ public class RailUpdate : MonoBehaviour {
        CurrentIndex = 0;
        DestinationNode = NodeList[CurrentIndex];
        MyTrans = GetComponent<Transform>();
-       rb = transform.parent.GetComponent<Rigidbody>();
+       rb = transform.parent.parent.GetComponent<Rigidbody>();
+       amar = transform.parent.GetComponent<AutoMoveAndRotate>();
 	}
 	
 	// Update is called once per frame
@@ -43,7 +46,7 @@ public class RailUpdate : MonoBehaviour {
         {
             
             float M;
-            MoveDirection = DestinationNode.transform.position - transform.parent.position;
+            MoveDirection = DestinationNode.transform.position - transform.parent.parent.position;
            // GetComponent<Transform>().Translate(MoveDirection.normalized * Speed * Time.deltaTime);
             
             //Controller.Move(MoveDirection.normalized * Speed * Time.deltaTime);
@@ -74,8 +77,8 @@ public class RailUpdate : MonoBehaviour {
         _direction.Normalize();
         Quaternion rotation = Quaternion.LookRotation(_direction);
 
-        transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, rotation, Time.deltaTime / rotationWidth);
-        rb.velocity = transform.parent.forward * Speed * Time.deltaTime;
+        transform.parent.parent.rotation = Quaternion.Slerp(transform.parent.parent.rotation, rotation, Time.deltaTime / rotationWidth);
+        rb.velocity = transform.parent.parent.forward * Speed * Time.deltaTime;
     }
 
     void OnCollisionEnter(Collision col)

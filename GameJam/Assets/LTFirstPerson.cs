@@ -69,7 +69,7 @@ public class LTFirstPerson : MonoBehaviour
 //        }
 
 
-       // NozTrans.localRotation = m_NozzleTargetRot;
+        NozTrans.localRotation = m_NozzleTargetRot;
         MyTrans.localRotation = m_CharacterTargetRot;
         MainC.localRotation = m_CameraTargetRot;
 
