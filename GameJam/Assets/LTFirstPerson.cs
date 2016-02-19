@@ -30,7 +30,7 @@ public class LTFirstPerson : MonoBehaviour
         MyTrans = GetComponent<Transform>();
         MainC = Camera.main.GetComponent<Transform>();
         NozTrans = Nozzle.GetComponent<Transform>();
-        World = GameObject.FindGameObjectWithTag("Ship").GetComponent<Transform>();
+        //World = GameObject.FindGameObjectWithTag("Ship").GetComponent<Transform>();
         XSensitivity = 4;
         YSensitivity = 4;
         MaxX = 0.25f;
@@ -41,7 +41,6 @@ public class LTFirstPerson : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
 
         RotateView();
     }

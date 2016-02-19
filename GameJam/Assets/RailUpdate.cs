@@ -24,7 +24,7 @@ public class RailUpdate : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Going = true;
+        Going = false;
 
         NodeList = GameObject.FindGameObjectsWithTag("TrackNode").OrderBy(gameObject => gameObject.name).ToArray<GameObject>();
       DebugLength = NodeList.GetLength(DebugLength);
