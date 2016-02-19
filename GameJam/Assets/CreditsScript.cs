@@ -46,7 +46,7 @@ public class CreditsScript : MonoBehaviour {
         {
             currspot++;
             if (Credits[currspot] == "Game Design" || Credits[currspot].ToLower() == "programmers" || Credits[currspot].ToLower() == "audio" ||
-                Credits[currspot].ToLower() == "artists" || Credits[currspot].ToLower() == "computer animations")
+                Credits[currspot].ToLower() == "artists" || Credits[currspot].ToLower() == "computer animations" || Credits[currspot].ToLower() == "vfx")
             {
                 RoleText.GetComponent<Text>().CrossFadeAlpha(0.0f, 0.1f, true);
                 RoleText.GetComponent<Text>().text = Credits[currspot];
