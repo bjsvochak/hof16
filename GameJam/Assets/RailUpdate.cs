@@ -20,6 +20,7 @@ public class RailUpdate : MonoBehaviour {
   private Rigidbody rb;
   private AutoMoveAndRotate amar;
 
+  public float m_Health = 1000.0f;
   CharacterController Controller;
 
 	// Use this for initialization
@@ -38,6 +39,14 @@ public class RailUpdate : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        if(m_Health <= 0)
+        {
+            Going = false;
+
+
+        }
+
 
         if (Input.GetKeyUp(KeyCode.F10))
             Going = !Going;

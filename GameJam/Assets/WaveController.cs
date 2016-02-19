@@ -26,7 +26,7 @@ public class WaveController : MonoBehaviour {
 
     void Awake()
     {
-        player = GameObject.Find("Game_Jam_R").transform;
+        player = GameObject.Find("Player").transform;
     }
     
     // Data that is only ever filled through the Unity Editor

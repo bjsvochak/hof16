@@ -5,11 +5,13 @@ public class Player_Test : MonoBehaviour
 {
 
     public GameObject target;
+    public GameObject CannonNozzle;
 
     // Use this for initialization
     void Start()
     {
         target = null;
+        CannonNozzle = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void SetTarget(GameObject tar)
