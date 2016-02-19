@@ -6,6 +6,8 @@ public class EnemyDeath : MonoBehaviour {
     public Rigidbody m_rRidgidBody;
     public float m_fDeathTimer;
     public bool isDead;
+    public AudioClip DeathSound;
+    public AudioSource source;
 
 	// Use this for initialization
 	void Start () {
@@ -17,14 +19,18 @@ public class EnemyDeath : MonoBehaviour {
 	void Update () {
         if (isDead)
         {
-            // effects
+            Debug.Log("working");
+           transform.Translate(transform.forward * 100 * Time.deltaTime);
+            transform.Rotate(0, 0, 45);
         }
 	}
 
     void ApplyDeath()
     {
         isDead = true;
-        //GetComponent<OtherScript>().enabled = false;
-        Destroy(gameObject);
+        GetComponent<EnemyMove>().enabled = false;
+        source.clip = DeathSound;
+        source.Play();
+        Destroy(gameObject,DeathSound.length);
     }
 }
