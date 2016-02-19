@@ -24,24 +24,25 @@ public class AutoTurretLock : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-   
-        float Angle = Vector3.Angle(Mytrans.forward.normalized, EnemyTransform.position);
-
-        if (Angle > 1)
+        if (!pauseUI.paused)
         {
-            float M;
-            if (Angle > 90)
-                M = MomentumCap;
-            else
+            float Angle = Vector3.Angle(Mytrans.forward.normalized, EnemyTransform.position);
+
+            if (Angle > 1)
             {
-                float R = Angle / 90;
-                M = R * MomentumCap;
+                float M;
+                if (Angle > 90)
+                    M = MomentumCap;
+                else
+                {
+                    float R = Angle / 90;
+                    M = R * MomentumCap;
+                }
+
+                Mytrans.Rotate(Mytrans.up, M);
             }
 
-            Mytrans.Rotate(Mytrans.up, M);
         }
-     
-
 	
 	}
 

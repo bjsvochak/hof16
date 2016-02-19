@@ -41,7 +41,6 @@ public class LTFirstPerson : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         RotateView();
     }
 

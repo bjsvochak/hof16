@@ -23,6 +23,11 @@ public class WaveController : MonoBehaviour {
     public EnemySpawn[] enemySpawns;
 
     private bool waveTriggered = false;
+
+    void Awake()
+    {
+        player = GameObject.Find("Game_Jam_R").transform;
+    }
     
     // Data that is only ever filled through the Unity Editor
     [System.Serializable]
