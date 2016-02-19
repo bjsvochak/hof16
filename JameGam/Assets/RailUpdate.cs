@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 public class RailUpdate : MonoBehaviour {
 
@@ -13,20 +14,23 @@ public class RailUpdate : MonoBehaviour {
   public bool Going = false;
   private Transform MyTrans;
   public Vector3 MoveDirection = Vector3.zero;
+  public float rotationWidth = 2.0f;
   private RailUpdate Script;
+  private Rigidbody rb;
 
   CharacterController Controller;
 
 	// Use this for initialization
 	void Start () {
+        Going = true;
 
-       NodeList = GameObject.FindGameObjectsWithTag("TrackNode");
+        NodeList = GameObject.FindGameObjectsWithTag("TrackNode").OrderBy(gameObject => gameObject.name).ToArray<GameObject>();
       DebugLength = NodeList.GetLength(DebugLength);
        Controller = GetComponent<CharacterController>();
-       CurrentIndex = DebugLength - 1;
+       CurrentIndex = 0;
        DestinationNode = NodeList[CurrentIndex];
        MyTrans = GetComponent<Transform>();
-
+       rb = transform.parent.GetComponent<Rigidbody>();
 	}
 	
 	// Update is called once per frame
@@ -37,12 +41,15 @@ public class RailUpdate : MonoBehaviour {
 
         if (Going)
         {
+            
             float M;
-            MoveDirection = DestinationNode.GetComponent<Transform>().position - MyTrans.position;
+            MoveDirection = DestinationNode.transform.position - transform.parent.position;
            // GetComponent<Transform>().Translate(MoveDirection.normalized * Speed * Time.deltaTime);
+            
             //Controller.Move(MoveDirection.normalized * Speed * Time.deltaTime);
+            MoveShip(MoveDirection);
 
-            MyTrans.localPosition += MoveDirection.normalized * Speed * Time.deltaTime;
+            //MyTrans.localPosition += MoveDirection.normalized * Speed * Time.deltaTime;
 
             //Angle = Vector3.Angle( MoveDirection.normalized, MyTrans.forward.normalized);
 
@@ -59,14 +66,25 @@ public class RailUpdate : MonoBehaviour {
 
         }
 
-
+        //2213
 	}
+
+    void MoveShip(Vector3 _direction)
+    {
+        _direction.Normalize();
+        Quaternion rotation = Quaternion.LookRotation(_direction);
+
+        transform.parent.rotation = Quaternion.Slerp(transform.parent.rotation, rotation, Time.deltaTime / rotationWidth);
+        rb.velocity = transform.parent.forward * Speed * Time.deltaTime;
+    }
 
     void OnCollisionEnter(Collision col)
     {
+
         if (col.gameObject == DestinationNode)
         {
-            if (CurrentIndex == 0)
+
+            if (CurrentIndex == DebugLength - 1)
             {
                 //Run End Level Here
                 //[
@@ -80,7 +98,7 @@ public class RailUpdate : MonoBehaviour {
             }
             else
             {
-                CurrentIndex--;
+                CurrentIndex++;
                 DestinationNode = NodeList[CurrentIndex];
                 Destroy(col.gameObject);
             }

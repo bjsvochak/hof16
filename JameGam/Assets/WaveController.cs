@@ -20,7 +20,9 @@ public class WaveController : MonoBehaviour {
 
     public Transform player;
     public Transform nodes;
-    public EnemySpawn[] enemySpawns;    
+    public EnemySpawn[] enemySpawns;
+
+    private bool waveTriggered = false;
     
     // Data that is only ever filled through the Unity Editor
     [System.Serializable]
@@ -33,8 +35,10 @@ public class WaveController : MonoBehaviour {
 
     void OnTriggerEnter(Collider _coll)
     {
-        if(_coll.CompareTag("Player"))
+        
+        if(!waveTriggered && _coll.CompareTag("Player"))
         {
+            waveTriggered = true;
             StartCoroutine(WaveRoutine());
 
             // IMPORTANT -- the following line prevents this script from triggering more than once
@@ -45,8 +49,6 @@ public class WaveController : MonoBehaviour {
 
     IEnumerator WaveRoutine()
     {
-        Debug.Log("WavesRoutine started.");
-
         // Go through each enemy wait for its delay and then spawn it
         for (int currentEnemy = 0; currentEnemy < enemySpawns.Length; ++currentEnemy)
         {
@@ -61,11 +63,13 @@ public class WaveController : MonoBehaviour {
             int numNodes = enemyNodes.childCount;
             EnemyMove enemyMove = enemy.GetComponent<EnemyMove>();
             enemyMove.nodes = new Transform[numNodes];
-            enemyMove.player = player;
+            enemyMove.player = player;            
 
             // assign all of the nodes from the nodes transform
             for(int i = 0; i < numNodes; ++i)
                 enemyMove.nodes[i] = enemyNodes.GetChild(i);
+
+            enemyMove.Reset();
         }
     }
 }

@@ -57,6 +57,9 @@ public class EnemyMove : MonoBehaviour {
     void Update()
     {
         // patrolling, flying to player, passing by, then flying away
+        if (nextPatrol < 1)
+            return;
+
         if (flyAwayDirection != Vector3.zero)
             FlyAway();
         if (nextPatrol < nodes.Length)
